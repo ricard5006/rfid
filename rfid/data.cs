@@ -268,8 +268,9 @@ namespace rfid
                         ,f005_creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
                     };
-
+                    
                     batch_ubi.Add(ubicaciones);
+
                     batch_zna.Add(zonas);
 
                     if (batch_ubi.Count >= 500)
