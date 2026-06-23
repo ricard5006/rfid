@@ -40,7 +40,7 @@ namespace rfid
             this.Size = new Size(630, 600);
         }
 
-        private void btnGuardar_t001_items_Click(object sender, EventArgs e)
+        private async void btnGuardar_t001_items_Click(object sender, EventArgs e)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace rfid
 
                 btnGuardar_t001_items.Enabled = false;
 
-                procesarExcel_t001_items(op.FileName);
+                await procesarExcel_t001_items(op.FileName);
 
 
             }
@@ -174,7 +174,7 @@ namespace rfid
 
         
 
-        private void btnGuardar_t004_t005_Click(object sender, EventArgs e)
+        private async void btnGuardar_t004_t005_Click(object sender, EventArgs e)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace rfid
 
                 btnGuardar_t004_t005.Enabled = false;
 
-                procesarExcel_t004_t005(op.FileName);
+                await procesarExcel_t004_t005(op.FileName);
 
 
             }
@@ -244,7 +244,7 @@ namespace rfid
                         );
                     }
 
-                    if (valores.Count < 3)
+                    if (valores.Count < 5)
                         continue;
 
                     t004_ubicaciones ubicaciones = new t004_ubicaciones()
@@ -312,7 +312,7 @@ namespace rfid
                 zonas = zonas
             };
 
-            var response = await t004_ubicaciones_Service.CreateAsync(request_zona);
+            var response = await t005_zonas_service.CreateAsync(request_zona);
 
             ApiResponse_lblInfo(response);
 
