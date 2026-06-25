@@ -1,4 +1,4 @@
-﻿namespace rfid
+namespace rfid
 {
     partial class data
     {
@@ -30,18 +30,20 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabImportar = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnGuardar_t020 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnGuardar_t0011 = new System.Windows.Forms.Button();
+            this.btnGuardar_t004_t005 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lbl_log = new System.Windows.Forms.Label();
             this.lbl_info = new System.Windows.Forms.Label();
             this.btnGuardar_t001_items = new System.Windows.Forms.Button();
             this.tabExportar = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnGuardar_t004_t005 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabImportar.SuspendLayout();
             this.SuspendLayout();
@@ -59,10 +61,12 @@
             // 
             // tabImportar
             // 
+            this.tabImportar.Controls.Add(this.label6);
+            this.tabImportar.Controls.Add(this.btnGuardar_t020);
             this.tabImportar.Controls.Add(this.button3);
             this.tabImportar.Controls.Add(this.label5);
             this.tabImportar.Controls.Add(this.label4);
-            this.tabImportar.Controls.Add(this.button2);
+            this.tabImportar.Controls.Add(this.btnGuardar_t0011);
             this.tabImportar.Controls.Add(this.btnGuardar_t004_t005);
             this.tabImportar.Controls.Add(this.label3);
             this.tabImportar.Controls.Add(this.label2);
@@ -77,6 +81,113 @@
             this.tabImportar.TabIndex = 0;
             this.tabImportar.Text = "Importar";
             this.tabImportar.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(51, 237);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(268, 38);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "DOCUMENTO ENTRADA\r\n[Tipo - numero - fecha - origen]";
+            // 
+            // btnGuardar_t020
+            // 
+            this.btnGuardar_t020.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGuardar_t020.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar_t020.Location = new System.Drawing.Point(419, 235);
+            this.btnGuardar_t020.Name = "btnGuardar_t020";
+            this.btnGuardar_t020.Size = new System.Drawing.Size(100, 40);
+            this.btnGuardar_t020.TabIndex = 13;
+            this.btnGuardar_t020.Text = "...";
+            this.btnGuardar_t020.UseVisualStyleBackColor = true;
+            this.btnGuardar_t020.Click += new System.EventHandler(this.btnGuardar_t020_Click);
+            // 
+            // button3
+            // 
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(419, 350);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 40);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "...";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(51, 371);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(149, 19);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "CARGUE MASIVO";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(51, 176);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(210, 38);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "CODIGOS BARRAS\r\n[Cod. Barras - Atributos]";
+            // 
+            // btnGuardar_t0011
+            // 
+            this.btnGuardar_t0011.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGuardar_t0011.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar_t0011.Location = new System.Drawing.Point(419, 174);
+            this.btnGuardar_t0011.Name = "btnGuardar_t0011";
+            this.btnGuardar_t0011.Size = new System.Drawing.Size(100, 40);
+            this.btnGuardar_t0011.TabIndex = 9;
+            this.btnGuardar_t0011.Text = "...";
+            this.btnGuardar_t0011.UseVisualStyleBackColor = true;
+            this.btnGuardar_t0011.Click += new System.EventHandler(this.btnGuardar_t0011_barras_Click);
+            // 
+            // btnGuardar_t004_t005
+            // 
+            this.btnGuardar_t004_t005.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGuardar_t004_t005.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar_t004_t005.Location = new System.Drawing.Point(419, 118);
+            this.btnGuardar_t004_t005.Name = "btnGuardar_t004_t005";
+            this.btnGuardar_t004_t005.Size = new System.Drawing.Size(100, 40);
+            this.btnGuardar_t004_t005.TabIndex = 8;
+            this.btnGuardar_t004_t005.Text = "...";
+            this.btnGuardar_t004_t005.UseVisualStyleBackColor = true;
+            this.btnGuardar_t004_t005.Click += new System.EventHandler(this.btnGuardar_t004_t005_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(51, 120);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(240, 38);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "UBICACIONES - ZONAS\r\n[Cod. Ubicacion - Cod. Zona]";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(51, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(213, 38);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "ITEMS\r\n[Cod. Item - Descripcion]";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 19);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Importar Maestras";
             // 
             // lbl_log
             // 
@@ -124,90 +235,6 @@
             this.tabExportar.Text = "Exportar";
             this.tabExportar.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Importar Maestras";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(51, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(213, 38);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "ITEMS\r\n[Cod. Item - Descripcion]";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(51, 120);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(240, 38);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "UBICACIONES - ZONAS\r\n[Cod. Ubicacion - Cod. Zona]";
-            // 
-            // btnGuardar_t004_t005
-            // 
-            this.btnGuardar_t004_t005.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGuardar_t004_t005.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar_t004_t005.Location = new System.Drawing.Point(419, 118);
-            this.btnGuardar_t004_t005.Name = "btnGuardar_t004_t005";
-            this.btnGuardar_t004_t005.Size = new System.Drawing.Size(100, 40);
-            this.btnGuardar_t004_t005.TabIndex = 8;
-            this.btnGuardar_t004_t005.Text = "...";
-            this.btnGuardar_t004_t005.UseVisualStyleBackColor = true;
-            this.btnGuardar_t004_t005.Click += new System.EventHandler(this.btnGuardar_t004_t005_Click);
-            // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(419, 174);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 40);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(51, 176);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(318, 38);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "CODIGOS BARRAS\r\n[Cod. Barras - Atributos - Cantidades]";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(51, 288);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 19);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "CARGUE MASIVO";
-            // 
-            // button3
-            // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(419, 267);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 40);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "...";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // data
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,10 +264,12 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnGuardar_t0011;
         private System.Windows.Forms.Button btnGuardar_t004_t005;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnGuardar_t020;
     }
 }

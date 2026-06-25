@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,6 @@ namespace rfid.entidades
         public string f0011_atributo_4 { get; set; }
         public string f0011_atributo_5 { get; set; }
         public string f0011_atributo_6 { get; set; }
-        public int f0011_cantidad { get; set; }
         public int f0011_habilitado { get; set; }
         public string f0011_creacion { get; set; }
         public string f0011_actualizacion { get; set; }
