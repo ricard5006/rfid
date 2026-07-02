@@ -67,14 +67,22 @@ switch ($method) {
 
     case "GET":
         try {
-            if (isset($_GET['id'])) {
+            if (isset($_GET['id']) && isset($_GET['detalle']) && $_GET['detalle'] == '1') {
+                $stmt = $conn->prepare("CALL sp_list_t021_documentos_detalle(?)");
+                $stmt->execute([$_GET['id']]);
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt->closeCursor();
+                echo json_encode($result);
+            } else if (isset($_GET['id'])) {
                 $stmt = $conn->prepare("CALL sp_find_t020_documentos(?)");
                 $stmt->execute([$_GET['id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 $stmt->closeCursor();
                 echo json_encode($result);
             } else {
-                $stmt = $conn->query("CALL sp_list_t020_documentos()");
+                $buscar = $_GET['buscar'] ?? null;
+                $stmt = $conn->prepare("CALL sp_list_t020_documentos_resumen(?)");
+                $stmt->execute([$buscar]);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $stmt->closeCursor();
                 echo json_encode($result);

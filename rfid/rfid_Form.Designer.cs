@@ -99,9 +99,9 @@
             this.dataToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5);
             this.dataToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(166, 32);
-            this.dataToolStripMenuItem.Text = "Data";
+            this.dataToolStripMenuItem.Text = "Maestras";
             this.dataToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.dataToolStripMenuItem.Click += new System.EventHandler(this.dataToolStripMenuItem_Click);
+            //this.dataToolStripMenuItem.Click += new System.EventHandler(this.dataToolStripMenuItem_Click);
             // 
             // importarToolStripMenuItem
             // 
@@ -110,6 +110,7 @@
             this.importarToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5);
             this.importarToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
             this.importarToolStripMenuItem.Text = "Importar";
+            this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // exportarToolStripMenuItem
             // 
@@ -118,14 +119,15 @@
             this.exportarToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5);
             this.exportarToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
             this.exportarToolStripMenuItem.Text = "Exportar";
+            this.exportarToolStripMenuItem.Click += new System.EventHandler(this.exportarToolStripMenuItem_Click);
             // 
             // operacionesToolStripMenuItem
             // 
             this.operacionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.inventariosToolStripMenuItem,
             this.entradasToolStripMenuItem,
             this.salidasToolStripMenuItem,
-            this.transferenciasToolStripMenuItem});
+            this.transferenciasToolStripMenuItem,
+            this.inventariosToolStripMenuItem});
             this.operacionesToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
             this.operacionesToolStripMenuItem.Name = "operacionesToolStripMenuItem";
             this.operacionesToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5);
@@ -148,6 +150,7 @@
             this.entradasToolStripMenuItem.Padding = new System.Windows.Forms.Padding(5);
             this.entradasToolStripMenuItem.Size = new System.Drawing.Size(218, 30);
             this.entradasToolStripMenuItem.Text = "Entradas";
+            this.entradasToolStripMenuItem.Click += new System.EventHandler(this.entradasToolStripMenuItem_Click);
             // 
             // salidasToolStripMenuItem
             // 

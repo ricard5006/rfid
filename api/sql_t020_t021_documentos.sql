@@ -176,6 +176,44 @@ BEGIN
         f021_actualizacion = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s');
 END$$
 DELIMITER ;
+DROP PROCEDURE IF EXISTS sp_list_t020_documentos_resumen;
+DELIMITER $$
+CREATE PROCEDURE sp_list_t020_documentos_resumen(
+    IN p_buscar VARCHAR(100)
+)
+BEGIN
+    SELECT
+        d.f020_id,
+        d.f020_tipo_documento,
+        d.f020_numero_documento,
+        d.f020_fecha_documento,
+        d.f020_origen,
+        d.f020_estado,
+        d.f020_habilitado,
+        COALESCE(SUM(dd.f021_cantidad), 0) AS cantidad_total,
+        COALESCE(SUM(dd.f021_cantidad_epc_generada), 0) AS cantidad_epc_generada,
+        COALESCE(SUM(dd.f021_cantidad_impresa), 0) AS cantidad_impresa,
+        COALESCE(SUM(dd.f021_cantidad - dd.f021_cantidad_epc_generada), 0) AS cantidad_pendiente_epc,
+        COALESCE(SUM(dd.f021_cantidad - dd.f021_cantidad_impresa), 0) AS cantidad_pendiente_impresion
+    FROM t020_documentos d
+    LEFT JOIN t021_documentos_detalle dd ON dd.f021_id_documento = d.f020_id
+    WHERE p_buscar IS NULL
+       OR TRIM(p_buscar) = ''
+       OR d.f020_tipo_documento LIKE CONCAT('%', p_buscar, '%')
+       OR d.f020_numero_documento LIKE CONCAT('%', p_buscar, '%')
+       OR d.f020_origen LIKE CONCAT('%', p_buscar, '%')
+       OR d.f020_estado LIKE CONCAT('%', p_buscar, '%')
+    GROUP BY
+        d.f020_id,
+        d.f020_tipo_documento,
+        d.f020_numero_documento,
+        d.f020_fecha_documento,
+        d.f020_origen,
+        d.f020_estado,
+        d.f020_habilitado
+    ORDER BY d.f020_id DESC;
+END$$
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS sp_list_t021_documentos_detalle;
 DELIMITER $$
@@ -184,8 +222,32 @@ CREATE PROCEDURE sp_list_t021_documentos_detalle(
 )
 BEGIN
     SELECT
-        dd.*
+        dd.f021_id,
+        dd.f021_id_documento,
+        i.f001_codigo_item,
+        i.f001_descripcion,
+        b.f0011_barra,
+        b.f0011_atributo_1,
+        b.f0011_atributo_2,
+        b.f0011_atributo_3,
+        b.f0011_atributo_4,
+        b.f0011_atributo_5,
+        b.f0011_atributo_6,
+        u.f004_codigo_ubicacion,
+        u.f004_descripcion,
+        z.f005_codigo_zona,
+        z.f005_descripcion,
+        dd.f021_cantidad,
+        dd.f021_cantidad_epc_generada,
+        dd.f021_cantidad_impresa,
+        dd.f021_cantidad - dd.f021_cantidad_epc_generada AS cantidad_pendiente_epc,
+        dd.f021_cantidad - dd.f021_cantidad_impresa AS cantidad_pendiente_impresion,
+        dd.f021_estado
     FROM t021_documentos_detalle dd
+    INNER JOIN t0011_barras b ON b.f0011_id = dd.f021_id_barra
+    LEFT JOIN t001_items i ON i.f001_id = b.f0011_id_item
+    LEFT JOIN t004_ubicaciones u ON u.f004_id = dd.f021_id_ubicacion
+    LEFT JOIN t005_zonas z ON z.f005_id = dd.f021_id_zona
     WHERE dd.f021_id_documento = p_f021_id_documento
     ORDER BY dd.f021_id;
 END$$

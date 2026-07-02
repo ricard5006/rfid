@@ -30,8 +30,6 @@ namespace rfid
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabImportar = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnGuardar_t020 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -61,8 +59,6 @@ namespace rfid
             // 
             // tabImportar
             // 
-            this.tabImportar.Controls.Add(this.label6);
-            this.tabImportar.Controls.Add(this.btnGuardar_t020);
             this.tabImportar.Controls.Add(this.button3);
             this.tabImportar.Controls.Add(this.label5);
             this.tabImportar.Controls.Add(this.label4);
@@ -82,28 +78,6 @@ namespace rfid
             this.tabImportar.Text = "Importar";
             this.tabImportar.UseVisualStyleBackColor = true;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(51, 237);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(268, 38);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "DOCUMENTO ENTRADA\r\n[Tipo - numero - fecha - origen]";
-            // 
-            // btnGuardar_t020
-            // 
-            this.btnGuardar_t020.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGuardar_t020.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar_t020.Location = new System.Drawing.Point(419, 235);
-            this.btnGuardar_t020.Name = "btnGuardar_t020";
-            this.btnGuardar_t020.Size = new System.Drawing.Size(100, 40);
-            this.btnGuardar_t020.TabIndex = 13;
-            this.btnGuardar_t020.Text = "...";
-            this.btnGuardar_t020.UseVisualStyleBackColor = true;
-            this.btnGuardar_t020.Click += new System.EventHandler(this.btnGuardar_t020_Click);
-            // 
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -119,6 +93,7 @@ namespace rfid
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label5.ForeColor = System.Drawing.Color.Red;
             this.label5.Location = new System.Drawing.Point(51, 371);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(149, 19);
@@ -269,7 +244,5 @@ namespace rfid
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnGuardar_t020;
     }
 }

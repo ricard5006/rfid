@@ -59,10 +59,24 @@ namespace rfid
             configuracion frm = new configuracion();
             abrir_modulo(frm);
         }
+        
 
-        private void dataToolStripMenuItem_Click(object sender, EventArgs e)
+        private void importarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             data frm = new data();
+            abrir_modulo(frm);
+        }
+
+        private void exportarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            data frm = new data();
+
+            abrir_modulo(frm);
+        }
+
+        private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            entradas frm = new entradas();
             abrir_modulo(frm);
         }
     }

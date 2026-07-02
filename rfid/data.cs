@@ -524,6 +524,7 @@ namespace rfid
             Process.Start("log.txt");
         }
 
+        /*
         private async void btnGuardar_t020_Click(object sender, EventArgs e)
         {
             try
@@ -694,10 +695,7 @@ namespace rfid
             return $"{tipoDocumento.Trim()}|{numeroDocumento.Trim()}|{fechaDocumento.Trim()}|{origen.Trim()}";
         }
 
-        private string CrearLlaveZona(string codigoUbicacion, string codigoZona)
-        {
-            return $"{codigoUbicacion.Trim()}|{codigoZona.Trim()}";
-        }
+        
 
         private string NormalizarFechaDocumento(string valorFecha)
         {
@@ -740,5 +738,13 @@ namespace rfid
             public t020_documentos documento { get; set; }
             public List<t021_documentos_detalle> detalles { get; set; }
         }
+
+    */
+
+        private string CrearLlaveZona(string codigoUbicacion, string codigoZona)
+        {
+            return $"{codigoUbicacion.Trim()}|{codigoZona.Trim()}";
+        }
+
     }
 }
