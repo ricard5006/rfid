@@ -111,7 +111,7 @@ namespace rfid
                         );
                     }
 
-                    if (valores.Count < 3)
+                    if (valores.Count < 2)
                         continue;
 
                     t001_items item = new t001_items()
@@ -173,10 +173,7 @@ namespace rfid
 
             return value;
         }
-
-        
-
-        
+                      
 
         private List<string> ObtenerValoresFila(Row row, SharedStringTablePart sharedStringPart, int totalColumnas)
         {
@@ -373,24 +370,16 @@ namespace rfid
 
         public async Task procesarExcel_t004_t005(string ruta)
         {
+            Dictionary<string, t004_ubicaciones> ubicacionesPorCodigo = new Dictionary<string, t004_ubicaciones>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, t005_zonas> zonasPorLlave = new Dictionary<string, t005_zonas>(StringComparer.OrdinalIgnoreCase);
+            int filasOmitidas = 0;
 
-            List<t004_ubicaciones> batch_ubi = new List<t004_ubicaciones>();
-            List<t005_zonas> batch_zna = new List<t005_zonas>();
-
-            using (SpreadsheetDocument document =
-            SpreadsheetDocument.Open(ruta, false))
+            using (SpreadsheetDocument document = SpreadsheetDocument.Open(ruta, false))
             {
-                WorkbookPart workbookPart =
-                    document.WorkbookPart;
-
-                SharedStringTablePart sharedStringPart =
-                    workbookPart.SharedStringTablePart;
-
-                WorksheetPart worksheetPart =
-                    workbookPart.WorksheetParts.First();
-
-                SheetData sheetData =
-                    worksheetPart.Worksheet.Elements<SheetData>().First();
+                WorkbookPart workbookPart = document.WorkbookPart;
+                SharedStringTablePart sharedStringPart = workbookPart.SharedStringTablePart;
+                WorksheetPart worksheetPart = workbookPart.WorksheetParts.First();
+                SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
 
                 bool primeraFila = true;
 
@@ -402,64 +391,66 @@ namespace rfid
                         continue;
                     }
 
-                    List<string> valores = new List<string>();
+                    List<string> valores = ObtenerValoresFila(row, sharedStringPart, 6);
 
-                    foreach (Cell cell in row.Elements<Cell>())
+                    if (string.IsNullOrWhiteSpace(valores[0]) ||
+                        string.IsNullOrWhiteSpace(valores[1]) ||
+                        string.IsNullOrWhiteSpace(valores[4]) ||
+                        string.IsNullOrWhiteSpace(valores[5]))
                     {
-                        valores.Add(
-                            ObtenerValorCelda(
-                                cell,
-                                sharedStringPart
-                            )
-                        );
+                        filasOmitidas++;
+                        continue;
                     }
 
-                    if (valores.Count < 6)
-                        continue;
+                    string codigoUbicacion = valores[0].Trim();
+                    string codigoZona = valores[4].Trim();
 
-                    t004_ubicaciones ubicaciones = new t004_ubicaciones()
+                    if (!ubicacionesPorCodigo.ContainsKey(codigoUbicacion))
                     {
-                        f004_codigo_ubicacion = valores[0]
-                        ,f004_descripcion = valores[1]
-                        ,f004_ciudad = valores[2]
-                        ,f004_direccion = valores[3]
-                        ,f004_habilitado = 1
-                        ,f004_creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        ubicacionesPorCodigo.Add(codigoUbicacion, new t004_ubicaciones()
+                        {
+                            f004_codigo_ubicacion = codigoUbicacion,
+                            f004_descripcion = valores[1],
+                            f004_ciudad = valores[2],
+                            f004_direccion = valores[3],
+                            f004_habilitado = 1,
+                            f004_creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        });
+                    }
 
-                    };
+                    string llaveZona = CrearLlaveZona(codigoUbicacion, codigoZona);
 
-                    t005_zonas zonas = new t005_zonas()
+                    if (!zonasPorLlave.ContainsKey(llaveZona))
                     {
-                        f005_id_ubicacion = valores[0]
-
-                        ,f005_codigo_zona = valores[4]
-                        ,f005_descripcion = valores[5]
-                        ,f005_habilitado = 1
-                        ,f005_creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-
-                    };
-                    
-                    batch_ubi.Add(ubicaciones);
-
-                    batch_zna.Add(zonas);
-
-                    if (batch_ubi.Count >= 500)
-                    {
-                        await EnviarBatch_t004(batch_ubi);
-                        await EnviarBatch_t005(batch_zna);
-
-                        batch_ubi.Clear();
-                        batch_zna.Clear();
+                        zonasPorLlave.Add(llaveZona, new t005_zonas()
+                        {
+                            f005_id_ubicacion = codigoUbicacion,
+                            f005_codigo_zona = codigoZona,
+                            f005_descripcion = valores[5],
+                            f005_habilitado = 1,
+                            f005_creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        });
                     }
                 }
             }
 
-            if (batch_ubi.Count > 0)
+            List<t004_ubicaciones> ubicaciones = ubicacionesPorCodigo.Values.ToList();
+            List<t005_zonas> zonas = zonasPorLlave.Values.ToList();
+
+            if (ubicaciones.Count > 0)
             {
-                await EnviarBatch_t004(batch_ubi);
-                await EnviarBatch_t005(batch_zna);
+                await EnviarBatch_t004(ubicaciones);
             }
 
+            if (zonas.Count > 0)
+            {
+                await EnviarBatch_t005(zonas);
+            }
+
+            if (filasOmitidas > 0)
+            {
+                MessageBox.Show($"Cargue terminado. Filas omitidas: {filasOmitidas}. Revise ubicaciones y zonas obligatorias.");
+            }
         }
         private async Task EnviarBatch_t004(List<t004_ubicaciones> ubicaciones)
         {
@@ -626,10 +617,11 @@ namespace rfid
                     int idZona;
                     int cantidad;
 
-                    if (!barrasPorCodigo.TryGetValue(codigoBarra.Trim(), out idBarra) ||
-                        !ubicacionesPorCodigo.TryGetValue(codigoUbicacion.Trim(), out idUbicacion) ||
-                        !zonasPorCodigo.TryGetValue(CrearLlaveZona(codigoUbicacion, codigoZona), out idZona) ||
-                        !TryParseCantidad(valorCantidad, out cantidad))
+                    if (!barrasPorCodigo.TryGetValue(codigoBarra.Trim(), out idBarra) 
+                        || !ubicacionesPorCodigo.TryGetValue(codigoUbicacion.Trim(), out idUbicacion) 
+                        || !zonasPorCodigo.TryGetValue(CrearLlaveZona(idUbicacion.ToString(), codigoZona), out idZona) 
+                        || !TryParseCantidad(valorCantidad, out cantidad)
+                        )
                     {
                         filasOmitidas++;
                         continue;

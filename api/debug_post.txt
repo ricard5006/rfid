@@ -1,0 +1,121 @@
+RAW DATA:
+
+JSON DECODE:
+
+USANDO _POST/_GET:
+Array
+(
+)
+
+RAW DATA:
+
+JSON DECODE:
+
+USANDO _POST/_GET:
+Array
+(
+    [p_idusuario] => w
+    [p_nombre] => e
+    [p_email] => e
+    [p_pass] => f
+    [p_perfil] => e
+    [p_habilitado] => w
+    [p_fecha_creacion] => w
+)
+
+RAW DATA:
+{"f001_id":null,"f001_idUsuario":"q","f001_nombre":"q","f001_email":"q","f001_pass":"q","f001_perfil":"","f001_habilitado":"True","f001_fecha_creacion":"AAAA0613","f001_fecha_actualizacion":null}
+JSON DECODE:
+Array
+(
+    [f001_id] => 
+    [f001_idUsuario] => q
+    [f001_nombre] => q
+    [f001_email] => q
+    [f001_pass] => q
+    [f001_perfil] => 
+    [f001_habilitado] => True
+    [f001_fecha_creacion] => AAAA0613
+    [f001_fecha_actualizacion] => 
+)
+
+RAW DATA:
+{"f001_id":null,"f001_idUsuario":"q","f001_nombre":"q","f001_email":"q","f001_pass":"q","f001_perfil":"","f001_habilitado":"True","f001_fecha_creacion":"AAAA0713","f001_fecha_actualizacion":null}
+JSON DECODE:
+Array
+(
+    [f001_id] => 
+    [f001_idUsuario] => q
+    [f001_nombre] => q
+    [f001_email] => q
+    [f001_pass] => q
+    [f001_perfil] => 
+    [f001_habilitado] => True
+    [f001_fecha_creacion] => AAAA0713
+    [f001_fecha_actualizacion] => 
+)
+
+RAW DATA:
+{"f001_id":null,"f001_idUsuario":"q","f001_nombre":"q","f001_email":"q","f001_pass":"q","f001_perfil":"","f001_habilitado":"True","f001_fecha_creacion":"AAAA1213","f001_fecha_actualizacion":null}
+JSON DECODE:
+Array
+(
+    [f001_id] => 
+    [f001_idUsuario] => q
+    [f001_nombre] => q
+    [f001_email] => q
+    [f001_pass] => q
+    [f001_perfil] => 
+    [f001_habilitado] => True
+    [f001_fecha_creacion] => AAAA1213
+    [f001_fecha_actualizacion] => 
+)
+
+RAW DATA:
+{"f001_id":null,"f001_idUsuario":"h","f001_nombre":"h","f001_email":"h","f001_pass":"h","f001_perfil":"","f001_habilitado":"True","f001_fecha_creacion":"AAAA4713","f001_fecha_actualizacion":null}
+JSON DECODE:
+Array
+(
+    [f001_id] => 
+    [f001_idUsuario] => h
+    [f001_nombre] => h
+    [f001_email] => h
+    [f001_pass] => h
+    [f001_perfil] => 
+    [f001_habilitado] => True
+    [f001_fecha_creacion] => AAAA4713
+    [f001_fecha_actualizacion] => 
+)
+
+RAW DATA:
+{"f001_id":null,"f001_idUsuario":"t","f001_nombre":"t","f001_email":"t","f001_pass":"t","f001_perfil":"","f001_habilitado":"True","f001_fecha_creacion":"AAAA5013","f001_fecha_actualizacion":null}
+JSON DECODE:
+Array
+(
+    [f001_id] => 
+    [f001_idUsuario] => t
+    [f001_nombre] => t
+    [f001_email] => t
+    [f001_pass] => t
+    [f001_perfil] => 
+    [f001_habilitado] => True
+    [f001_fecha_creacion] => AAAA5013
+    [f001_fecha_actualizacion] => 
+)
+
+RAW DATA:
+{"f001_id":null,"f001_idUsuario":"c","f001_nombre":"c","f001_email":"c","f001_pass":"c","f001_perfil":"","f001_habilitado":"True","f001_fecha_creacion":"2025-11-13 16:04:06","f001_fecha_actualizacion":null}
+JSON DECODE:
+Array
+(
+    [f001_id] => 
+    [f001_idUsuario] => c
+    [f001_nombre] => c
+    [f001_email] => c
+    [f001_pass] => c
+    [f001_perfil] => 
+    [f001_habilitado] => True
+    [f001_fecha_creacion] => 2025-11-13 16:04:06
+    [f001_fecha_actualizacion] => 
+)
+
