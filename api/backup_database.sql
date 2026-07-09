@@ -177,6 +177,19 @@ SELECT * FROM t003_epc WHERE f003_id_documento_detalle = p_f021_id;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_list_t003_epc_pendientes_by_documento
+DELIMITER //
+CREATE PROCEDURE `sp_list_t003_epc_pendientes_by_documento`(
+  IN `p_f020_id` INT
+)
+BEGIN
+SELECT e.* FROM t003_epc e
+INNER JOIN t021_documentos_detalle dd ON dd.f021_id = e.f003_id_documento_detalle
+WHERE dd.f021_id_documento = p_f020_id AND e.f003_impreso = 0
+ORDER BY e.f003_id;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento invrfid001.sp_list_t004_ubicaciones
 DELIMITER //
 CREATE PROCEDURE `sp_list_t004_ubicaciones`()
@@ -708,6 +721,14 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_ultimo_id_t003_epc
+DELIMITER //
+CREATE PROCEDURE `sp_ultimo_id_t003_epc`()
+BEGIN
+SELECT * FROM t003_epc ORDER BY f003_id DESC LIMIT 1;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento invrfid001.sp_update_t002_usuario
 DELIMITER //
 CREATE PROCEDURE `sp_update_t002_usuario`(
@@ -855,6 +876,36 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_update_t021_cantidad_epc_generada
+DELIMITER //
+CREATE PROCEDURE `sp_update_t021_cantidad_epc_generada`(
+  IN `p_f021_id` INT,
+  IN `p_cantidad` INT,
+  IN `p_actualizacion` VARCHAR(50)
+)
+BEGIN
+UPDATE t021_documentos_detalle SET
+  f021_cantidad_epc_generada = f021_cantidad_epc_generada + p_cantidad,
+  f021_actualizacion = p_actualizacion
+WHERE f021_id = p_f021_id;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento invrfid001.sp_update_t021_cantidad_impresa
+DELIMITER //
+CREATE PROCEDURE `sp_update_t021_cantidad_impresa`(
+  IN `p_f021_id` INT,
+  IN `p_cantidad` INT,
+  IN `p_actualizacion` VARCHAR(50)
+)
+BEGIN
+UPDATE t021_documentos_detalle SET
+  f021_cantidad_impresa = f021_cantidad_impresa + p_cantidad,
+  f021_actualizacion = p_actualizacion
+WHERE f021_id = p_f021_id;
+END//
+DELIMITER ;
+
 -- Volcando estructura para tabla invrfid001.t000_configuracion
 CREATE TABLE IF NOT EXISTS `t000_configuracion` (
   `f000_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -922,7 +973,7 @@ CREATE TABLE IF NOT EXISTS `t003_epc` (
   `f003_actualizacion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`f003_id`),
   UNIQUE KEY `f003_epc` (`f003_epc`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -1043,7 +1094,7 @@ CREATE TABLE IF NOT EXISTS `t020_documentos` (
   `f020_actualizacion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`f020_id`),
   UNIQUE KEY `uk_t020_documento` (`f020_tipo_documento`,`f020_numero_documento`,`f020_origen`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -1067,7 +1118,7 @@ CREATE TABLE IF NOT EXISTS `t021_documentos_detalle` (
   KEY `ix_t021_barra` (`f021_id_barra`),
   KEY `ix_t021_ubicacion` (`f021_id_ubicacion`),
   KEY `ix_t021_zona` (`f021_id_zona`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- La exportación de datos fue deseleccionada.
 
