@@ -16,6 +16,7 @@ namespace rfid
         private BaseApiService<t002_usuarios> t002_usuario_service;
         private BaseApiService<t010_impresora> t010_impresora_service;
         private BaseApiService<t011_reader> t011_reader_service;
+        private BaseApiService<t012_formatos> t012_formatos_service;
         
         //private BaseApiService<t002_perfil> t0021_perfiles_service;
         //private BaseApiService<t002_t003> t002_t003_service;
@@ -29,13 +30,18 @@ namespace rfid
             t002_usuario_service = new BaseApiService<t002_usuarios>($"{config.ApiBaseUrl}usuario.php");
             t010_impresora_service = new BaseApiService<t010_impresora>($"{config.ApiBaseUrl}impresora.php");
             t011_reader_service = new BaseApiService<t011_reader>($"{config.ApiBaseUrl}reader.php");
+            t012_formatos_service = new BaseApiService<t012_formatos>($"{config.ApiBaseUrl}formatos.php");
 
             //t002_perfiles_service = new BaseApiService<t002_perfil>($"{config.ApiBaseUrl}perfiles.php");
             //t002_t003_service = new BaseApiService<t002_t003>($"{config.ApiBaseUrl}perfiles.php");
 
+            btnGuardar_f012.Click += btnGuardar_f012_Click;
+            dgv_formatos.CellClick += dgv_formatos_CellClick;
+
             list_t002_usuarios();
             list_t010_impresora();
             list_t011_reader();
+            list_t012_formatos();
             //list_t002_perfiles();
         }
 
@@ -401,7 +407,68 @@ namespace rfid
 
         #endregion
 
+        #region formatos
+        private void btnGuardar_f012_Click(object sender, EventArgs e)
+        {
+            if (tbf012_descripcion.Text.ToString() != ""
+                && tbf012_formato.Text.ToString() != ""
+                )
+            {
+                var formato = new t012_formatos
+                {
+                    f012_id = string.IsNullOrWhiteSpace(tbf012_id.Text) ? 1 : Convert.ToInt32(tbf012_id.Text),
+                    f012_descripcion = tbf012_descripcion.Text.ToString(),
+                    f012_formato = tbf012_formato.Text.ToString(),
+                    f012_habilitado = chkf012_habilitado.Checked ? 1 : 0,
+                    f012_creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    f012_actualizacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                };
 
+                if (tbf012_id.Text.ToString() != "")
+                {
+                    update_t012_formatos(formato);
+                }
+                else
+                {
+                    new_t012_formatos(formato);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Campos obligatorios, por favor revisar!");
+            }
+        }
+
+        private async void list_t012_formatos()
+        {
+            var lista = await t012_formatos_service.GetAllAsync();
+            dgv_formatos.DataSource = lista;
+        }
+
+        private async void new_t012_formatos(t012_formatos formato)
+        {
+            await t012_formatos_service.CreateAsync(formato);
+            list_t012_formatos();
+        }
+
+        private async void update_t012_formatos(t012_formatos formato)
+        {
+            await t012_formatos_service.UpdateAsync(formato);
+            list_t012_formatos();
+        }
+
+        private void dgv_formatos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = dgv_formatos.Rows[e.RowIndex];
+                tbf012_id.Text = fila.Cells["f012_id"].Value.ToString();
+                tbf012_descripcion.Text = fila.Cells["f012_descripcion"].Value.ToString();
+                tbf012_formato.Text = fila.Cells["f012_formato"].Value.ToString();
+                chkf012_habilitado.Checked = Convert.ToInt32(fila.Cells["f012_habilitado"].Value) == 1;
+            }
+        }
+        #endregion
 
         private void configuracion_Load(object sender, EventArgs e)
         {

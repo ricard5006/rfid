@@ -10,6 +10,7 @@ namespace rfid.entidades
     {
         public int f021_id { get; set; }
         public int f021_id_documento { get; set; }
+        public int f021_id_barra { get; set; }
         public string f001_codigo_item { get; set; }
         public string f001_descripcion { get; set; }
         public string f0011_barra { get; set; }

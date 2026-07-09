@@ -112,6 +112,16 @@ f010_id=p_f010_id;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_find_t012_formatos
+DELIMITER //
+CREATE PROCEDURE `sp_find_t012_formatos`(
+	IN `p_f012_id` INT
+)
+BEGIN
+SELECT * FROM t012_formatos WHERE f012_id=p_f012_id;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento invrfid001.sp_find_t020_documentos
 DELIMITER //
 CREATE PROCEDURE `sp_find_t020_documentos`(
@@ -154,6 +164,16 @@ DELIMITER //
 CREATE PROCEDURE `sp_list_t003_epc`()
 BEGIN
 SELECT * FROM t003_epc;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento invrfid001.sp_list_t003_epc_by_detalle
+DELIMITER //
+CREATE PROCEDURE `sp_list_t003_epc_by_detalle`(
+  IN `p_f021_id` INT
+)
+BEGIN
+SELECT * FROM t003_epc WHERE f003_id_documento_detalle = p_f021_id;
 END//
 DELIMITER ;
 
@@ -205,6 +225,14 @@ SELECT * FROM t011_reader;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_list_t012_formatos
+DELIMITER //
+CREATE PROCEDURE `sp_list_t012_formatos`()
+BEGIN
+SELECT * FROM t012_formatos;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento invrfid001.sp_list_t020_documentos
 DELIMITER //
 CREATE PROCEDURE `sp_list_t020_documentos`()
@@ -212,6 +240,45 @@ BEGIN
     SELECT
         d.*
     FROM t020_documentos d
+    ORDER BY d.f020_id DESC;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento invrfid001.sp_list_t020_documentos_resumen
+DELIMITER //
+CREATE PROCEDURE `sp_list_t020_documentos_resumen`(
+    IN p_buscar VARCHAR(100)
+)
+BEGIN
+    SELECT
+        d.f020_id,
+        d.f020_tipo_documento,
+        d.f020_numero_documento,
+        d.f020_fecha_documento,
+        d.f020_origen,
+        d.f020_estado,
+        d.f020_habilitado,
+        COALESCE(SUM(dd.f021_cantidad), 0) AS cantidad_total,
+        COALESCE(SUM(dd.f021_cantidad_epc_generada), 0) AS cantidad_epc_generada,
+        COALESCE(SUM(dd.f021_cantidad_impresa), 0) AS cantidad_impresa,
+        COALESCE(SUM(dd.f021_cantidad - dd.f021_cantidad_epc_generada), 0) AS cantidad_pendiente_epc,
+        COALESCE(SUM(dd.f021_cantidad - dd.f021_cantidad_impresa), 0) AS cantidad_pendiente_impresion
+    FROM t020_documentos d
+    LEFT JOIN t021_documentos_detalle dd ON dd.f021_id_documento = d.f020_id
+    WHERE p_buscar IS NULL
+       OR TRIM(p_buscar) = ''
+       OR d.f020_tipo_documento LIKE CONCAT('%', p_buscar, '%')
+       OR d.f020_numero_documento LIKE CONCAT('%', p_buscar, '%')
+       OR d.f020_origen LIKE CONCAT('%', p_buscar, '%')
+       OR d.f020_estado LIKE CONCAT('%', p_buscar, '%')
+    GROUP BY
+        d.f020_id,
+        d.f020_tipo_documento,
+        d.f020_numero_documento,
+        d.f020_fecha_documento,
+        d.f020_origen,
+        d.f020_estado,
+        d.f020_habilitado
     ORDER BY d.f020_id DESC;
 END//
 DELIMITER ;
@@ -304,6 +371,35 @@ MD5(p_f002_contrasena),
 p_f002_habilitado,
 
 p_f002_creacion);
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento invrfid001.sp_new_t003_epc
+DELIMITER //
+CREATE PROCEDURE `sp_new_t003_epc`(
+  IN `p_f003_id_barra` INT,
+  IN `p_f003_id_documento_detalle` INT,
+  IN `p_f003_epc` VARCHAR(50),
+  IN `p_f003_impreso` INT,
+  IN `p_f003_habilitado` INT,
+  IN `p_f003_creacion` VARCHAR(50)
+)
+BEGIN
+INSERT INTO t003_epc (
+  f003_id_barra,
+  f003_id_documento_detalle,
+  f003_epc,
+  f003_impreso,
+  f003_habilitado,
+  f003_creacion
+) VALUES (
+  p_f003_id_barra,
+  p_f003_id_documento_detalle,
+  p_f003_epc,
+  p_f003_impreso,
+  p_f003_habilitado,
+  p_f003_creacion
+);
 END//
 DELIMITER ;
 
@@ -497,6 +593,29 @@ p_f011_creacion
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_new_t012_formatos
+DELIMITER //
+CREATE PROCEDURE `sp_new_t012_formatos`(
+	IN `p_f012_descripcion` VARCHAR(100),
+	IN `p_f012_formato` TEXT,
+	IN `p_f012_habilitado` INT,
+	IN `p_f012_creacion` VARCHAR(50)
+)
+BEGIN
+INSERT INTO t012_formatos (
+  f012_descripcion,
+  f012_formato,
+  f012_habilitado,
+  f012_creacion
+) VALUES (
+  p_f012_descripcion,
+  p_f012_formato,
+  p_f012_habilitado,
+  p_f012_creacion
+);
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento invrfid001.sp_new_t020_documentos
 DELIMITER //
 CREATE PROCEDURE `sp_new_t020_documentos`(
@@ -609,6 +728,21 @@ WHERE f002_id= p_f002_id;
 END//
 DELIMITER ;
 
+-- Volcando estructura para procedimiento invrfid001.sp_update_t003_epc_impreso
+DELIMITER //
+CREATE PROCEDURE `sp_update_t003_epc_impreso`(
+  IN `p_f003_id` INT,
+  IN `p_f003_impreso` INT,
+  IN `p_f003_actualizacion` VARCHAR(50)
+)
+BEGIN
+UPDATE t003_epc SET
+  f003_impreso = p_f003_impreso,
+  f003_actualizacion = p_f003_actualizacion
+WHERE f003_id = p_f003_id;
+END//
+DELIMITER ;
+
 -- Volcando estructura para procedimiento invrfid001.sp_update_t004_ubicaciones
 DELIMITER //
 CREATE PROCEDURE `sp_update_t004_ubicaciones`(
@@ -674,6 +808,25 @@ f011_contrasena=p_f011_contrasena,
 f011_habilitado=p_f011_habilitado,
 f011_actualizacion=p_f011_actualizacion
 WHERE f011_id=p_f011_id;
+END//
+DELIMITER ;
+
+-- Volcando estructura para procedimiento invrfid001.sp_update_t012_formatos
+DELIMITER //
+CREATE PROCEDURE `sp_update_t012_formatos`(
+	IN `p_f012_id` INT,
+	IN `p_f012_descripcion` VARCHAR(100),
+	IN `p_f012_formato` TEXT,
+	IN `p_f012_habilitado` INT,
+	IN `p_f012_actualizacion` VARCHAR(50)
+)
+BEGIN
+UPDATE t012_formatos SET
+  f012_descripcion = p_f012_descripcion,
+  f012_formato = p_f012_formato,
+  f012_habilitado = p_f012_habilitado,
+  f012_actualizacion = p_f012_actualizacion
+WHERE f012_id = p_f012_id;
 END//
 DELIMITER ;
 
@@ -761,6 +914,7 @@ CREATE TABLE IF NOT EXISTS `t002_usuarios` (
 CREATE TABLE IF NOT EXISTS `t003_epc` (
   `f003_id` int(11) NOT NULL AUTO_INCREMENT,
   `f003_id_barra` int(11) DEFAULT NULL,
+  `f003_id_documento_detalle` int(11) DEFAULT NULL,
   `f003_epc` varchar(50) DEFAULT NULL,
   `f003_impreso` int(11) DEFAULT NULL,
   `f003_habilitado` int(11) DEFAULT NULL,
@@ -859,6 +1013,19 @@ CREATE TABLE IF NOT EXISTS `t011_reader` (
   `f011_creacion` varchar(50) DEFAULT NULL,
   `f011_actualizacion` varchar(50) DEFAULT NULL,
   KEY `f011_id` (`f011_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla invrfid001.t012_formatos
+CREATE TABLE IF NOT EXISTS `t012_formatos` (
+  `f012_id` int(11) NOT NULL AUTO_INCREMENT,
+  `f012_descripcion` varchar(100) DEFAULT NULL,
+  `f012_formato` text DEFAULT NULL,
+  `f012_habilitado` int(11) DEFAULT NULL,
+  `f012_creacion` varchar(50) DEFAULT NULL,
+  `f012_actualizacion` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`f012_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.

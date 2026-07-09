@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -102,6 +102,7 @@
     <Compile Include="entidades\t005_zonas.cs" />
     <Compile Include="entidades\t010_impresora.cs" />
     <Compile Include="entidades\t011_reader.cs" />
+    <Compile Include="entidades\t012_formatos.cs" />
     <Compile Include="entidades\t020_documentos.cs" />
     <Compile Include="entidades\t020_documentos_resumen.cs" />
     <Compile Include="entidades\t021_documentos_detalle.cs" />
@@ -112,8 +113,15 @@
     <Compile Include="entradas.Designer.cs">
       <DependentUpon>entradas.cs</DependentUpon>
     </Compile>
+    <Compile Include="impresion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="impresion.Designer.cs">
+      <DependentUpon>impresion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawPrinterHelper.cs" />
     <Compile Include="rfid_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="entradas.resx">
       <DependentUpon>entradas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="impresion.resx">
+      <DependentUpon>impresion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

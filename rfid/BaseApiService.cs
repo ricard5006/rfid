@@ -48,14 +48,11 @@ public class BaseApiService<T>
 
 
     // POST: crear
-    public async Task<ApiResponse> CreateAsync<T>(T data)
+    public async Task<ApiResponse> CreateAsync<TIn>(TIn data)
     {
         string json = JsonConvert.SerializeObject(data);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await _http.PostAsync(_baseUrl, content);
-
-        Console.WriteLine("Respuesta de API_CreateAsync:");
-        Console.WriteLine(json);
 
         return new ApiResponse
         {
@@ -66,14 +63,11 @@ public class BaseApiService<T>
     }
 
     // PUT: actualizar
-    public async Task<bool> UpdateAsync(T data)
+    public async Task<bool> UpdateAsync<TIn>(TIn data)
     {
         string json = JsonConvert.SerializeObject(data);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await _http.PutAsync(_baseUrl, content);
-        //var response = await _http.PutAsync($"{_baseUrl}?id={id}", content);
-        Console.WriteLine("Respuesta de API_UpdateAsync:");
-        Console.WriteLine(json);
         return response.IsSuccessStatusCode;
     }
 

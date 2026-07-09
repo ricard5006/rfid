@@ -35,6 +35,7 @@
             this.dgv_t020 = new System.Windows.Forms.DataGridView();
             this.btsBuscar_t020 = new System.Windows.Forms.Button();
             this.tb_buscar = new System.Windows.Forms.TextBox();
+            this.btnGenerar_t003 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_t020)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,16 +87,16 @@
             // dgv_t020
             // 
             this.dgv_t020.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_t020.Location = new System.Drawing.Point(12, 210);
+            this.dgv_t020.Location = new System.Drawing.Point(12, 202);
             this.dgv_t020.Name = "dgv_t020";
-            this.dgv_t020.Size = new System.Drawing.Size(560, 345);
+            this.dgv_t020.Size = new System.Drawing.Size(560, 331);
             this.dgv_t020.TabIndex = 19;
             // 
             // btsBuscar_t020
             // 
             this.btsBuscar_t020.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btsBuscar_t020.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btsBuscar_t020.Location = new System.Drawing.Point(472, 164);
+            this.btsBuscar_t020.Location = new System.Drawing.Point(472, 156);
             this.btsBuscar_t020.Name = "btsBuscar_t020";
             this.btsBuscar_t020.Size = new System.Drawing.Size(100, 32);
             this.btsBuscar_t020.TabIndex = 20;
@@ -106,7 +107,7 @@
             // 
             this.tb_buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_buscar.ForeColor = System.Drawing.Color.Gray;
-            this.tb_buscar.Location = new System.Drawing.Point(12, 168);
+            this.tb_buscar.Location = new System.Drawing.Point(12, 160);
             this.tb_buscar.Name = "tb_buscar";
             this.tb_buscar.Size = new System.Drawing.Size(454, 26);
             this.tb_buscar.TabIndex = 21;
@@ -114,12 +115,26 @@
             this.tb_buscar.Enter += new System.EventHandler(this.tb_buscar_Enter);
             this.tb_buscar.Leave += new System.EventHandler(this.tb_buscar_Leave);
             // 
+            // btnGenerar_t003
+            // 
+            this.btnGenerar_t003.Enabled = false;
+            this.btnGenerar_t003.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGenerar_t003.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerar_t003.Location = new System.Drawing.Point(472, 539);
+            this.btnGenerar_t003.Name = "btnGenerar_t003";
+            this.btnGenerar_t003.Size = new System.Drawing.Size(100, 40);
+            this.btnGenerar_t003.TabIndex = 22;
+            this.btnGenerar_t003.Text = "Generar";
+            this.btnGenerar_t003.UseVisualStyleBackColor = true;
+            this.btnGenerar_t003.Click += new System.EventHandler(this.btnGenerar_t003_Click);
+            // 
             // entradas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(584, 591);
+            this.Controls.Add(this.btnGenerar_t003);
             this.Controls.Add(this.tb_buscar);
             this.Controls.Add(this.btsBuscar_t020);
             this.Controls.Add(this.dgv_t020);
@@ -146,5 +161,6 @@
         private System.Windows.Forms.DataGridView dgv_t020;
         private System.Windows.Forms.Button btsBuscar_t020;
         private System.Windows.Forms.TextBox tb_buscar;
+        private System.Windows.Forms.Button btnGenerar_t003;
     }
 }

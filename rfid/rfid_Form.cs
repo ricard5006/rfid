@@ -79,5 +79,11 @@ namespace rfid
             entradas frm = new entradas();
             abrir_modulo(frm);
         }
+
+        private void impresionStripMenuItem_Click(object sender, EventArgs e)
+        {
+            impresion frm = new impresion();
+            abrir_modulo(frm);
+        }
     }
 }

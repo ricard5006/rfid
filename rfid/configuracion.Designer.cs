@@ -44,6 +44,11 @@
             this.btnGuardar_t002_usuarios = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPerfiles = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.chk_mod_configuracion = new System.Windows.Forms.CheckBox();
             this.chk_mod_informes = new System.Windows.Forms.CheckBox();
@@ -77,21 +82,28 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabAplicacion = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tabFormatos = new System.Windows.Forms.TabPage();
+            this.btnGuardar_f012 = new System.Windows.Forms.Button();
+            this.tbf012_id = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.chkf012_habilitado = new System.Windows.Forms.CheckBox();
+            this.tbf012_descripcion = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tbf012_formato = new System.Windows.Forms.TextBox();
+            this.dgv_formatos = new System.Windows.Forms.DataGridView();
+            this.label19 = new System.Windows.Forms.Label();
             this.TcContenedor.SuspendLayout();
             this.tabUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatagvUsuarios)).BeginInit();
             this.tabPerfiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabImpresora.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatagvImpresoras)).BeginInit();
             this.tabRFID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatagvReader)).BeginInit();
             this.tabAplicacion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabFormatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_formatos)).BeginInit();
             this.SuspendLayout();
             // 
             // TcContenedor
@@ -101,6 +113,7 @@
             this.TcContenedor.Controls.Add(this.tabImpresora);
             this.TcContenedor.Controls.Add(this.tabRFID);
             this.TcContenedor.Controls.Add(this.tabAplicacion);
+            this.TcContenedor.Controls.Add(this.tabFormatos);
             this.TcContenedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TcContenedor.ItemSize = new System.Drawing.Size(1, 20);
             this.TcContenedor.Location = new System.Drawing.Point(0, 0);
@@ -278,6 +291,52 @@
             this.tabPerfiles.TabIndex = 5;
             this.tabPerfiles.Text = "Perfiles";
             this.tabPerfiles.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(235, 40);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(112, 23);
+            this.checkBox1.TabIndex = 30;
+            this.checkBox1.Text = "Habilitado";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 310);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(560, 199);
+            this.dataGridView1.TabIndex = 29;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(235, 109);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(300, 27);
+            this.textBox1.TabIndex = 22;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(235, 69);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(300, 27);
+            this.textBox2.TabIndex = 20;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(156, 77);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(42, 19);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "*Id:";
             // 
             // label14
             // 
@@ -629,51 +688,111 @@
             this.button7.Text = "Guardar";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // tabFormatos
             // 
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(235, 109);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(300, 27);
-            this.textBox1.TabIndex = 22;
+            this.tabFormatos.Controls.Add(this.label19);
+            this.tabFormatos.Controls.Add(this.dgv_formatos);
+            this.tabFormatos.Controls.Add(this.tbf012_formato);
+            this.tabFormatos.Controls.Add(this.tbf012_id);
+            this.tabFormatos.Controls.Add(this.label16);
+            this.tabFormatos.Controls.Add(this.chkf012_habilitado);
+            this.tabFormatos.Controls.Add(this.tbf012_descripcion);
+            this.tabFormatos.Controls.Add(this.label18);
+            this.tabFormatos.Controls.Add(this.btnGuardar_f012);
+            this.tabFormatos.Location = new System.Drawing.Point(4, 24);
+            this.tabFormatos.Name = "tabFormatos";
+            this.tabFormatos.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFormatos.Size = new System.Drawing.Size(576, 564);
+            this.tabFormatos.TabIndex = 9;
+            this.tabFormatos.Text = "Formatos";
+            this.tabFormatos.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // btnGuardar_f012
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(235, 69);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(300, 27);
-            this.textBox2.TabIndex = 20;
+            this.btnGuardar_f012.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGuardar_f012.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar_f012.Location = new System.Drawing.Point(468, 515);
+            this.btnGuardar_f012.Name = "btnGuardar_f012";
+            this.btnGuardar_f012.Size = new System.Drawing.Size(100, 40);
+            this.btnGuardar_f012.TabIndex = 19;
+            this.btnGuardar_f012.Text = "Guardar";
+            this.btnGuardar_f012.UseVisualStyleBackColor = true;
             // 
-            // label17
+            // tbf012_id
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(156, 77);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(42, 19);
-            this.label17.TabIndex = 19;
-            this.label17.Text = "*Id:";
+            this.tbf012_id.Enabled = false;
+            this.tbf012_id.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbf012_id.Location = new System.Drawing.Point(225, 72);
+            this.tbf012_id.Name = "tbf012_id";
+            this.tbf012_id.Size = new System.Drawing.Size(300, 27);
+            this.tbf012_id.TabIndex = 38;
             // 
-            // dataGridView1
+            // label16
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 310);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(560, 199);
-            this.dataGridView1.TabIndex = 29;
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(152, 80);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(42, 19);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "*Id:";
             // 
-            // checkBox1
+            // chkf012_habilitado
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(235, 40);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(112, 23);
-            this.checkBox1.TabIndex = 30;
-            this.checkBox1.Text = "Habilitado";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkf012_habilitado.AutoSize = true;
+            this.chkf012_habilitado.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkf012_habilitado.Location = new System.Drawing.Point(225, 32);
+            this.chkf012_habilitado.Name = "chkf012_habilitado";
+            this.chkf012_habilitado.Size = new System.Drawing.Size(112, 23);
+            this.chkf012_habilitado.TabIndex = 36;
+            this.chkf012_habilitado.Text = "Habilitado";
+            this.chkf012_habilitado.UseVisualStyleBackColor = true;
+            // 
+            // tbf012_descripcion
+            // 
+            this.tbf012_descripcion.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbf012_descripcion.Location = new System.Drawing.Point(225, 109);
+            this.tbf012_descripcion.Name = "tbf012_descripcion";
+            this.tbf012_descripcion.Size = new System.Drawing.Size(300, 27);
+            this.tbf012_descripcion.TabIndex = 35;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(80, 117);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(118, 19);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "*Descripcion:";
+            // 
+            // tbf012_formato
+            // 
+            this.tbf012_formato.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbf012_formato.Location = new System.Drawing.Point(225, 142);
+            this.tbf012_formato.Multiline = true;
+            this.tbf012_formato.Name = "tbf012_formato";
+            this.tbf012_formato.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbf012_formato.Size = new System.Drawing.Size(300, 148);
+            this.tbf012_formato.TabIndex = 39;
+            // 
+            // dgv_formatos
+            // 
+            this.dgv_formatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_formatos.Location = new System.Drawing.Point(8, 296);
+            this.dgv_formatos.Name = "dgv_formatos";
+            this.dgv_formatos.Size = new System.Drawing.Size(560, 199);
+            this.dgv_formatos.TabIndex = 40;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(51, 161);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(147, 19);
+            this.label19.TabIndex = 41;
+            this.label19.Text = "*Formato (PRN):";
             // 
             // configuracion
             // 
@@ -693,6 +812,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DatagvUsuarios)).EndInit();
             this.tabPerfiles.ResumeLayout(false);
             this.tabPerfiles.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabImpresora.ResumeLayout(false);
             this.tabImpresora.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatagvImpresoras)).EndInit();
@@ -700,7 +820,9 @@
             this.tabRFID.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatagvReader)).EndInit();
             this.tabAplicacion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabFormatos.ResumeLayout(false);
+            this.tabFormatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_formatos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -761,5 +883,15 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage tabFormatos;
+        private System.Windows.Forms.TextBox tbf012_id;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox chkf012_habilitado;
+        private System.Windows.Forms.TextBox tbf012_descripcion;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnGuardar_f012;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridView dgv_formatos;
+        private System.Windows.Forms.TextBox tbf012_formato;
     }
 }

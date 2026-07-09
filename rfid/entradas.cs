@@ -23,6 +23,7 @@ namespace rfid
         private BaseApiService<t004_ubicaciones> t004_ubicaciones_Service;
         private BaseApiService<t005_zonas> t005_zonas_service;
         private BaseApiService<t020_documentos> t020_documentos_service;
+        private BaseApiService<t003_epc> t003_epc_service;
         public entradas()
         {
             InitializeComponent();
@@ -31,12 +32,14 @@ namespace rfid
             t004_ubicaciones_Service = new BaseApiService<t004_ubicaciones>($"{config.ApiBaseUrl}ubicaciones.php");
             t005_zonas_service = new BaseApiService<t005_zonas>($"{config.ApiBaseUrl}zonas.php");
             t020_documentos_service = new BaseApiService<t020_documentos>($"{config.ApiBaseUrl}documentos.php");
+            t003_epc_service = new BaseApiService<t003_epc>($"{config.ApiBaseUrl}epc.php");
 
             this.Location = new Point(170, 0);
             this.Size = new Size(630, 600);
 
             btsBuscar_t020.Click += btsBuscar_t020_Click;
             dgv_t020.CellDoubleClick += dgv_t020_CellDoubleClick;
+            dgv_t020.CellClick += dgv_t020_CellClick;
             this.Shown += entradas_Shown;
         }
 
@@ -492,6 +495,154 @@ namespace rfid
                 tb_buscar.Text = "Buscar";
                 tb_buscar.ForeColor = System.Drawing.Color.Gray;
             }
+        }
+
+        private async void btnGenerar_t003_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgv_t020.Tag == null || dgv_t020.Tag.ToString() != "documentos")
+                    return;
+
+                if (dgv_t020.SelectedRows.Count == 0)
+                    return;
+
+                DataGridViewRow fila = dgv_t020.SelectedRows[0];
+
+                if (fila.Cells["f020_id"].Value == null)
+                    return;
+
+                int idDocumento = Convert.ToInt32(fila.Cells["f020_id"].Value);
+                btnGenerar_t003.Enabled = false;
+
+                string url = $"{config.ApiBaseUrl}documentos.php?id={idDocumento}&detalle=1";
+                BaseApiService<t021_documentos_detalle_consulta> service = new BaseApiService<t021_documentos_detalle_consulta>(url);
+                List<t021_documentos_detalle_consulta> detalles = await service.GetAllAsync();
+
+                var detallesPendientes = detalles.Where(d => d.cantidad_pendiente_epc > 0).ToList();
+
+                if (detallesPendientes.Count == 0)
+                {
+                    MessageBox.Show("No hay EPCs pendientes por generar para este documento.", "Generar EPC", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                int totalPendientes = detallesPendientes.Sum(d => d.cantidad_pendiente_epc);
+
+                DialogResult dr = MessageBox.Show(
+                    $"Se generaran {totalPendientes} EPC(s) para el documento {idDocumento}. Continuar?",
+                    "Generar EPC",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (dr != DialogResult.Yes)
+                    return;
+
+                int ultimoId = await ObtenerUltimoIdEpc();
+                List<t003_epc> epcs = new List<t003_epc>();
+                List<object> detallesActualizar = new List<object>();
+                int contador = 0;
+                string creacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string actualizacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string epcPrefijo = "30342F01A84D";
+
+                foreach (var detalle in detallesPendientes)
+                {
+                    int generados = 0;
+
+                    for (int i = 0; i < detalle.cantidad_pendiente_epc; i++)
+                    {
+                        contador++;
+                        long serial = ultimoId + contador;
+                        string epcCompleto = epcPrefijo + serial.ToString("X12");
+
+                        epcs.Add(new t003_epc
+                        {
+                            f003_id_barra = detalle.f021_id_barra,
+                            f003_id_documento_detalle = detalle.f021_id,
+                            f003_epc = epcCompleto,
+                            f003_impreso = 0,
+                            f003_habilitado = 1,
+                            f003_creacion = creacion
+                        });
+
+                        generados++;
+                    }
+
+                    detallesActualizar.Add(new
+                    {
+                        f021_id = detalle.f021_id,
+                        cantidad = generados,
+                        actualizacion = actualizacion
+                    });
+                }
+
+                var request = new { epcs = epcs, detalles = detallesActualizar };
+
+                var response = await t003_epc_service.CreateAsync(request);
+
+                if (response.StatusCode == 200)
+                {
+                    MessageBox.Show($"EPCs generados exitosamente: {totalPendientes}", "Generar EPC", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await BuscarDocumentosAsync();
+                }
+                else
+                {
+                    MessageBox.Show($"Error al generar EPCs: {response.Content}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar EPCs: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                btnGenerar_t003.Enabled = true;
+            }
+        }
+
+        private async Task<int> ObtenerUltimoIdEpc()
+        {
+            try
+            {
+                string url = $"{config.ApiBaseUrl}epc.php?max=1";
+                BaseApiService<t003_epc> service = new BaseApiService<t003_epc>(url);
+                List<t003_epc> resultado = await service.GetAllAsync();
+
+                if (resultado != null && resultado.Count > 0)
+                {
+                    return resultado[0].f003_id;
+                }
+            }
+            catch { }
+
+            return 0;
+        }
+
+        private void dgv_t020_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || dgv_t020.Tag == null)
+            {
+                btnGenerar_t003.Enabled = false;
+                return;
+            }
+
+            if (dgv_t020.Tag.ToString() != "documentos")
+            {
+                btnGenerar_t003.Enabled = false;
+                return;
+            }
+
+            DataGridViewRow fila = dgv_t020.Rows[e.RowIndex];
+
+            if (fila.Cells["cantidad_pendiente_epc"].Value == null)
+            {
+                btnGenerar_t003.Enabled = false;
+                return;
+            }
+
+            int pendientes = Convert.ToInt32(fila.Cells["cantidad_pendiente_epc"].Value);
+            btnGenerar_t003.Enabled = pendientes > 0;
         }
     }
 }
